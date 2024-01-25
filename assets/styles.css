@@ -1,0 +1,157 @@
+/* Estilos comuns */
+body {
+    background-image: url('/assets/img/Imagem\ para\ Perfil.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
+}
+
+.mouse {
+    cursor: pointer;
+}
+
+.estrutura {
+    margin-left: 20px;
+}
+
+.item-pasta {
+    margin-left: 20px;
+    font-family: Arial, sans-serif;
+    color: black;
+}
+
+.link-download {
+    margin-left: 40px;
+    display: block;
+    font-family: Arial, sans-serif;
+    color: #0066CC; /* ou a cor desejada para os links */
+    text-decoration: none;
+}
+
+.link-download:hover {
+    text-decoration: underline;
+}
+
+.linha-separadora {
+    margin-left: 20px;
+    width: 80%;
+    border: 0.5px solid #c5c5c5;
+}
+
+/* Novas classes no CSS */
+.logo-img {
+    width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Novas classes no CSS */
+.titulo-principal {
+    font-family: Arial, sans-serif;
+    color: #008080;
+    margin-left: 20px;
+    display: inline-block;
+}
+
+.botao-atualizar {
+    margin-bottom: 10px;
+    display: list-item;
+}
+
+.loading > div:first-child {
+    max-width: 1000%;
+    width: 550px;
+}
+
+.container-rodape {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+    background-color: white;
+    margin-bottom: 100px;
+}
+
+.margem-rodape {
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    color: black;
+    margin-bottom: 60px;    
+}
+
+.font-rodape {
+    font-family: Arial, sans-serif;
+    margin-bottom: -2px;
+}
+
+.rodape{
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px;
+    background-color: #F0F8FF;
+}
+
+.space-rodape {
+    padding-bottom: 10px;
+}
+
+/* Regras de mídia para dispositivos móveis */
+@media only screen and (max-width: 576px) {
+    .container-rodape {
+        padding: 10px; /* Reduz o espaçamento em dispositivos menores */
+    }
+
+    .titulo-principal {
+        font-size: 24px; /* Ajusta o tamanho do título */
+    }
+
+    .estrutura {
+        margin-left: 10px; /* Reduz o recuo da estrutura */
+    }
+}
+
+
+/* Regras de mídia para tablets */
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+    .container-rodape {
+        max-width: 80%; /* Reduz um pouco a largura máxima */
+    }
+
+    .item-pasta {
+        margin-left: 10px; /* Reduz a margem das pastas */
+    }
+
+    /* Outros ajustes para telas entre 577px e 768px de largura... */
+}
+
+/* Regras de mídia para dispositivos menores */
+@media only screen and (max-width: 992px) {
+    .botao-atualizar {
+        font-size: 14px; /* Reduz o tamanho do botão de atualização */
+    }
+
+    .estrutura {
+        margin-left: 10px; /* Reduz o recuo da estrutura */
+    }
+}
+
+/* Regras de mídia para dispositivos pequenos */
+@media only screen and (max-width: 1200px) {
+    .rodape {
+        padding: 5px; /* Reduz o espaçamento no rodapé */
+    }
+}
+
+/* Regras de mídia para dispositivos grandes */
+@media only screen and (min-width: 1201px) {
+    .container-rodape {
+        max-width: 1200px; /* Define um máximo para telas maiores */
+    }
+}
