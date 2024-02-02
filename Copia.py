@@ -3,14 +3,16 @@ import re
 import dash
 import shutil
 import tempfile
-from flask import send_file, send_from_directory
+from flask import send_file, send_from_directory, Flask
 import dash_bootstrap_components as dbc
-from dash import html, Input, Output, State, dcc, ctx
+from dash import html, Input, Output, dcc, dash
 
 # Constantes
 NETWORK_DIRECTORY_PATH = r'\\192.168.0.253\publico\Joseane (Arquivo Engenharia)\_Envio DOC. SST e RH\@DOC. SST e RH _ PADRAO'
 
-app = dash.Dash(__name__, external_stylesheets=["style.css", dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
+APP = dash.Dash(__name__, external_stylesheets=["style.css", dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
+
+APP.title = "Remessa de Documentos"
 
 # Função para limpar nomes de arquivos
 def clean_filename(name):
@@ -84,6 +86,7 @@ modal_atualizar = dbc.Modal([
     dbc.ModalHeader(dbc.ModalTitle("Saudações,")),
     dbc.ModalBody([
         html.P("É um prazer recebê-lo(a) aqui. Seu download iniciará em instantes! "),
+        html.P("O download de alguns arquivos pode levar algum tempo para iniciar; por favor, tenha paciência."),
         html.P("Não compartilhe dados com terceiros sem autorização.")]),
 ], id="modal-atualizar", is_open=False)
 
@@ -93,15 +96,16 @@ modal_download = dbc.Modal([
     dbc.ModalBody(html.P("O download da pasta foi iniciado!")),
 ], id="modal-download", is_open=False)
 
-app.layout = html.Div(
+APP.layout = html.Div(
     [
+        html.Meta(name='viewport', content='width=device-width, initial-scale=1.0'),
         html.Div(
             [
                 html.Img(
                     src='assets/img/LOGO_paisagem.png',
                     className='logo-img img-fluid'
                 ),
-                html.H1('Remessa de Documentos - UFV SABESP', className='titulo-principal'),
+                html.H1('Remessa de Documentos - UFV SABESP \n teste', className='titulo-principal'),
                 html.Button('Atualizar Lista', id='btn-atualizar', className='botao-atualizar'),
                 dcc.Loading(
                     id="loading-1",
@@ -117,8 +121,30 @@ app.layout = html.Div(
         modal_download,
         html.Footer(
             [
-                html.P('Criado por André Gondim', className='font-rodape'),
-                html.P('2024', className='font-rodape')
+                html.Div([
+                    html.P('Cápua Engenharia', className='font-rodape'),
+                    html.P('Endereço: Avenida Adhemar Pereira de Barro, 246 - Jardim Santa Maria, Jacareí - SP', className='font-rodape'),
+                ], className='info-contato'),
+
+                html.Div([
+                    html.P('Desenvolvido por André Gondim', className='font-rodape'),
+                    html.P('2024', className='font-rodape'),
+                ], className='creditos-desenvolvedor'),
+                html.Div([
+                    html.A(
+                        html.Img(src="/assets/img/facebook.png"),
+                        href="https://www.facebook.com/capuamarketing", target="_blank", className='font-rodape'
+                    ),
+                    
+                    html.A(
+                        html.Img(src="/assets/img/linkedin.png"),
+                        href="https://br.linkedin.com/company/c-pua-projetos", target="_blank", className='font-rodape'
+                    ),
+                    html.A(
+                        html.Img(src="/assets/img/www.png"),
+                        href="http://capua.com.br/", target="_blank", className='font-rodape'
+                    ),
+                ], className='redes-sociais')
             ],
             className='rodape'
         )
@@ -127,7 +153,7 @@ app.layout = html.Div(
 )
 
 # Callback para abrir o modal de atualização
-@app.callback(
+@APP.callback(
     Output('modal-atualizar', 'is_open'),
     [Input('btn-atualizar', 'n_clicks')],
     prevent_initial_call=True,
@@ -136,7 +162,7 @@ def open_modal_atualizar(btn_atualizar_clicks):
     return True
 
 # Callback para abrir o modal de download
-@app.callback(
+@APP.callback(
     [Output('modal-download', 'is_open'),
      Output('modal-download', 'children')],
     [Input('download-folder-', 'n_clicks')],
@@ -146,7 +172,7 @@ def open_modal_download(download_clicks):
     return True, "O download da pasta foi iniciado!"
 
 # Callback para atualizar a lista de pastas
-@app.callback(
+@APP.callback(
     Output('lista-pastas', 'children'),
     [Input('btn-atualizar', 'n_clicks')],
     prevent_initial_call=True
@@ -163,7 +189,7 @@ def update_folders(n_clicks):
     return structure
 
 # Adicione a rota para download de pasta
-@app.server.route("/download-folder/<path:foldername>")
+@APP.server.route("/download-folder/<path:foldername>")
 def download_folder(foldername):
     folder_path = os.path.join(NETWORK_DIRECTORY_PATH, foldername)
 
@@ -185,9 +211,9 @@ def download_folder(foldername):
         return "Erro ao criar o arquivo zip da pasta."
 
 # Adicione a rota para download de arquivo
-@app.server.route("/download/<path:filename>")
+@APP.server.route("/download/<path:filename>")
 def download_file(filename):
     return send_from_directory(NETWORK_DIRECTORY_PATH, filename, as_attachment=True)
 
 if __name__ == '__main__':
-    app.run_server(port=8050, debug=True)
+    APP.run(host='0.0.0.0', port=8050)

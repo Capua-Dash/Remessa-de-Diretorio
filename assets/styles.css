@@ -1,4 +1,3 @@
-/* Estilos comuns */
 body {
     background-image: url('/assets/img/Imagem\ para\ Perfil.jpg');
     background-size: cover;
@@ -24,7 +23,7 @@ body {
     margin-left: 40px;
     display: block;
     font-family: Arial, sans-serif;
-    color: #0066CC; /* ou a cor desejada para os links */
+    color: #0066CC;
     text-decoration: none;
 }
 
@@ -38,19 +37,21 @@ body {
     border: 0.5px solid #c5c5c5;
 }
 
-/* Novas classes no CSS */
 .logo-img {
     width: 200px;
     height: auto;
     margin-bottom: 20px;
 }
 
-/* Novas classes no CSS */
 .titulo-principal {
     font-family: Arial, sans-serif;
     color: #008080;
     margin-left: 20px;
     display: inline-block;
+}
+
+.titulo-lista {
+    display: list-item;
 }
 
 .botao-atualizar {
@@ -61,6 +62,15 @@ body {
 .loading > div:first-child {
     max-width: 1000%;
     width: 550px;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.titulo-principal {
+    font-size: 1.5em; /* Ajuste conforme necessário */
 }
 
 .container-rodape {
@@ -102,6 +112,42 @@ body {
     padding-bottom: 10px;
 }
 
+.info-contato {
+    float: left;
+    text-align: left;
+    width: 30%;
+}
+
+.creditos-desenvolvedor {
+    float: left;
+    text-align: center;
+    width: 40%;
+}
+
+.redes-sociais {
+    float: right;
+    text-align: right;
+    width: 30%;
+}
+
+.rodape:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.redes-sociais a {
+    font-size: 18px;
+    margin-left: 10px;
+    color: #0077b5;
+}
+
+.redes-sociais img {
+    width: 30px;
+    margin-left: 10px;
+    display: inline-block;
+}
+
 /* Regras de mídia para dispositivos móveis */
 @media only screen and (max-width: 576px) {
     .container-rodape {
@@ -109,14 +155,55 @@ body {
     }
 
     .titulo-principal {
-        font-size: 24px; /* Ajusta o tamanho do título */
+        font-size: 20px; /* Ajusta o tamanho do título */
     }
 
-    .estrutura {
-        margin-left: 10px; /* Reduz o recuo da estrutura */
+    .estrutura, .item-pasta {
+        margin-left: 10px; /* Reduz o recuo da estrutura e das pastas */
+    }
+
+    .botao-atualizar {
+        margin-bottom: 5px; /* Reduz o espaço abaixo do botão de atualização */
+    }
+
+    .logo-img {
+        width: 150px; /* Ajusta o tamanho da logo para dispositivos menores */
+        margin-bottom: 10px;
+    }
+
+    .modal-content {
+        max-width: 90%; /* Ajusta a largura do conteúdo do modal para melhor se encaixar em dispositivos menores */
+    }
+
+    .rodape {
+        padding: 5px; /* Reduz o espaçamento no rodapé */
     }
 }
 
+@media only screen and (max-width: 576px) {
+    .logo-img {
+        width: 150px; /* Ajusta o tamanho da logo para dispositivos menores */
+        margin-bottom: 10px;
+    }
+}
+
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+    .container-rodape {
+        max-width: 80%; /* Reduz um pouco a largura máxima */
+    }
+
+    .item-pasta {
+        margin-left: 10px; /* Reduz a margem das pastas */
+    }
+
+    /* Outros ajustes para telas entre 577px e 768px de largura... */
+}
+
+@media only screen and (max-width: 600px) {
+    .container-fluid {
+        padding: 10px;
+    }
+}
 
 /* Regras de mídia para tablets */
 @media only screen and (min-width: 577px) and (max-width: 768px) {
@@ -139,6 +226,16 @@ body {
 
     .estrutura {
         margin-left: 10px; /* Reduz o recuo da estrutura */
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .titulo-principal {
+        font-size: 18px; /* Ajusta o tamanho do título */
+    }
+
+    .estrutura, .item-pasta {
+        margin-left: 10px; /* Reduz o recuo da estrutura e das pastas */
     }
 }
 
