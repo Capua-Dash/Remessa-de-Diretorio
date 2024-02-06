@@ -6,13 +6,36 @@ import tempfile
 from flask import send_file, send_from_directory, Flask
 import dash_bootstrap_components as dbc
 from dash import html, Input, Output, dcc, dash
+import dash_auth
 
 # Constantes
 NETWORK_DIRECTORY_PATH = r'\\192.168.0.253\publico\Joseane (Arquivo Engenharia)\_Envio DOC. SST e RH\@DOC. SST e RH _ PADRAO'
 
+# Defina suas credenciais de usuário
+VALID_USERNAME_PASSWORD_PAIRS = {
+    'joseane morais': 'jmorais@123',
+    'edineia marins': 'emarins@123',
+    'josiane vicente': 'jvicente@123',
+    'anderson oliveira': 'aoliveira@123',
+    'lucia oliveira': 'loliveira@123',
+    'rodrigo arruda': 'rarruda@123',
+    'josé junior': 'jjunior@123'
+}
+
 APP = dash.Dash(__name__, external_stylesheets=["style.css", dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
 
+# Adicione a autenticação ao seu aplicativo
+auth = dash_auth.BasicAuth(
+    APP,
+    VALID_USERNAME_PASSWORD_PAIRS
+)
+
 APP.title = "Remessa de Documentos"
+
+# Função para limpar nomes de arquivos
+def clean_filename(name):
+    """Remove caracteres especiais do nome do arquivo."""
+    return re.sub(r'[^\w\s]', '_', name)
 
 # Função para limpar nomes de arquivos
 def clean_filename(name):
