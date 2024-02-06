@@ -216,4 +216,4 @@ def download_file(filename):
     return send_from_directory(NETWORK_DIRECTORY_PATH, filename, as_attachment=True)
 
 if __name__ == '__main__':
-    APP.run(host='0.0.0.0', port=8050)
+    APP.run(host='0.0.0.0', port=1100)
