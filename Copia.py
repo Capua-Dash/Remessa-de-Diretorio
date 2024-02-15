@@ -13,6 +13,7 @@ NETWORK_DIRECTORY_PATH = r'\\192.168.0.253\publico\Joseane (Arquivo Engenharia)\
 
 # Defina suas credenciais de usuário
 VALID_USERNAME_PASSWORD_PAIRS = {
+    'andre gondim': 'agondim@123',
     'joseane morais': 'jmorais@123',
     'edineia marins': 'emarins@123',
     'josiane vicente': 'jvicente@123',
@@ -31,6 +32,7 @@ auth = dash_auth.BasicAuth(
 )
 
 APP.title = "Remessa de Documentos"
+
 
 # Função para limpar nomes de arquivos
 def clean_filename(name):
@@ -145,15 +147,19 @@ APP.layout = html.Div(
         html.Footer(
             [
                 html.Div([
-                    html.P('Cápua Engenharia', className='font-rodape'),
-                    html.P('Endereço: Avenida Adhemar Pereira de Barro, 246 - Jardim Santa Maria, Jacareí - SP', className='font-rodape'),
-                ], className='info-contato'),
+                    html.P('CÁPUA ENGENHARIA', className='font-rodape-title'),
+                    ], className='info-contato'),
 
                 html.Div([
                     html.P('Desenvolvido por André Gondim', className='font-rodape'),
                     html.P('2024', className='font-rodape'),
                 ], className='creditos-desenvolvedor'),
                 html.Div([
+                    html.A(
+                        html.Img(src="/assets/img/pin.png"),
+                        href="https://maps.app.goo.gl/AETsHhsox8qcbbLk8", target="_blank", className='font-rodape'
+                    ),
+                    
                     html.A(
                         html.Img(src="/assets/img/facebook.png"),
                         href="https://www.facebook.com/capuamarketing", target="_blank", className='font-rodape'
