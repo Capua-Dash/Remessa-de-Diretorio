@@ -188,4 +188,4 @@ def update_folders(n_clicks):
     return structure
 
 if __name__ == '__main__':
-    app.run_server(port=8050, debug=True)
+    app.run_server(port=1100, debug=True)
