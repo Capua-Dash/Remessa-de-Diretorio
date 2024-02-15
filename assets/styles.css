@@ -96,6 +96,14 @@ body {
     margin-bottom: -2px;
 }
 
+.font-rodape-title {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin-bottom: -2px;
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(41,169,225);
+}
+
 .rodape{
     position: fixed;
     bottom: 0;
