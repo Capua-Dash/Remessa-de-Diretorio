@@ -1,1 +1,1 @@
-web: gunicorn Copia:server
+gunicorn app:server
