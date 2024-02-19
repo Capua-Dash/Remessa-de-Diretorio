@@ -20,10 +20,15 @@ VALID_USERNAME_PASSWORD_PAIRS = {
     'anderson oliveira': 'aoliveira@123',
     'lucia oliveira': 'loliveira@123',
     'rodrigo arruda': 'rarruda@123',
-    'josé junior': 'jjunior@123'
+    'josé junior': 'jjunior@123',
+    'camila barbosa': 'cbarbosa@123',
+    'amanda santos': 'asantos@123',
+    'gislaine moreira': 'gmoreira@123',
+    'anderson oliveira': 'aoliveira@123'
 }
 
 APP = dash.Dash(__name__, external_stylesheets=["style.css", dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
+server = APP.server
 
 # Adicione a autenticação ao seu aplicativo
 auth = dash_auth.BasicAuth(
@@ -130,7 +135,7 @@ APP.layout = html.Div(
                     src='assets/img/LOGO_paisagem.png',
                     className='logo-img img-fluid'
                 ),
-                html.H1('Remessa de Documentos - UFV SABESP \n teste', className='titulo-principal'),
+                html.H1('Documentação mobilização RH e SST - UFV SABESP', className='titulo-principal'),
                 html.Button('Atualizar Lista', id='btn-atualizar', className='botao-atualizar'),
                 dcc.Loading(
                     id="loading-1",
@@ -225,7 +230,7 @@ def download_folder(foldername):
     try:
         # Cria um diretório temporário
         temp_dir = tempfile.mkdtemp()
-
+        
         # Copia todo o conteúdo da pasta para o diretório temporário
         shutil.copytree(folder_path, os.path.join(temp_dir, foldername))
 

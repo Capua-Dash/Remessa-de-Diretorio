@@ -61,7 +61,8 @@ body {
 
 .loading > div:first-child {
     max-width: 1000%;
-    width: 550px;
+    width: 650px;
+    margin-bottom: 30px;
 }
 
 .img-fluid {
@@ -88,17 +89,16 @@ body {
     font-size: 16px;
     font-family: Arial, sans-serif;
     color: black;
-    margin-bottom: 60px;    
 }
 
 .font-rodape {
     font-family: Arial, sans-serif;
-    margin-bottom: -2px;
+    margin-bottom: -0px;
 }
 
 .font-rodape-title {
     font-family: 'Segoe UI', Arial, sans-serif;
-    margin-bottom: -2px;
+    margin-bottom: 0px;
     font-size: 24px;
     font-weight: bold;
     color: rgb(41,169,225);
@@ -114,16 +114,14 @@ body {
     font-size: 14px;
     padding: 10px;
     background-color: #F0F8FF;
-}
-
-.space-rodape {
-    padding-bottom: 10px;
+    padding-bottom: 0px;
 }
 
 .info-contato {
     float: left;
     text-align: left;
     width: 30%;
+    margin-bottom: 10px;
 }
 
 .creditos-desenvolvedor {
