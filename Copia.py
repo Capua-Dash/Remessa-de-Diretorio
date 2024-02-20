@@ -155,8 +155,7 @@ APP.layout = html.Div(
                     ], className='info-contato'),
 
                 html.Div([
-                    html.P('Desenvolvido por André Gondim', className='font-rodape'),
-                    html.P('2024', className='font-rodape'),
+                    html.P('André Gondim © 2024', className='font-rodape'),
                 ], className='creditos-desenvolvedor'),
                 html.Div([
                     html.A(
@@ -184,6 +183,7 @@ APP.layout = html.Div(
     ],
     className='container-fluid imgbg',
 )
+
 
 # Callback para abrir o modal de atualização
 @APP.callback(
@@ -249,4 +249,4 @@ def download_file(filename):
     return send_from_directory(NETWORK_DIRECTORY_PATH, filename, as_attachment=True)
 
 if __name__ == '__main__':
-    APP.run(host='0.0.0.0', port=1100)
+    APP.run(debug=False) 

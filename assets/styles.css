@@ -3,6 +3,8 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     margin: 0;
+    width: 100vw;
+    height: 100vh;
 }
 
 .mouse {
@@ -98,10 +100,10 @@ body {
 
 .font-rodape-title {
     font-family: 'Segoe UI', Arial, sans-serif;
-    margin-bottom: 0px;
     font-size: 24px;
     font-weight: bold;
     color: rgb(41,169,225);
+    margin-bottom: 0;
 }
 
 .rodape{
@@ -114,26 +116,29 @@ body {
     font-size: 14px;
     padding: 10px;
     background-color: #F0F8FF;
-    padding-bottom: 0px;
+    padding: 0px 10px 0px 10px;
+    height: 46px;
 }
 
 .info-contato {
     float: left;
     text-align: left;
     width: 30%;
-    margin-bottom: 10px;
+    margin-top: 5px;
 }
 
 .creditos-desenvolvedor {
     float: left;
     text-align: center;
     width: 40%;
+    margin-top: 12px;
 }
 
 .redes-sociais {
     float: right;
     text-align: right;
     width: 30%;
+    margin-top: 8px;
 }
 
 .rodape:after {
