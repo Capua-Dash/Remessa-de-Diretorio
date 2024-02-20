@@ -38,7 +38,6 @@ auth = dash_auth.BasicAuth(
 
 APP.title = "Remessa de Documentos"
 
-
 # Função para limpar nomes de arquivos
 def clean_filename(name):
     """Remove caracteres especiais do nome do arquivo."""
