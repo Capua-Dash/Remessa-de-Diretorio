@@ -3,45 +3,29 @@ import re
 import dash
 import shutil
 import tempfile
-from flask import send_file, send_from_directory, Flask
+from flask import send_file, send_from_directory
 import dash_bootstrap_components as dbc
-from dash import html, Input, Output, dcc, dash
-import dash_auth
+from dash import html, Input, Output, dcc, dash, callback_context
+from dash.exceptions import PreventUpdate
+import dash_html_components as html
+from app import app
 
 # Constantes
 NETWORK_DIRECTORY_PATH = r'\\192.168.0.253\publico\Joseane (Arquivo Engenharia)\00 Envio DOC. SST e RH\00 DOC. SST e RH'
 
-# Defina suas credenciais de usuário
-VALID_USERNAME_PASSWORD_PAIRS = {
-    'andre gondim': 'agondim@123',
-    'joseane morais': 'jmorais@123',
-    'edineia marins': 'emarins@123',
-    'josiane vicente': 'jvicente@123',
-    'anderson oliveira': 'aoliveira@123',
-    'lucia oliveira': 'loliveira@123',
-    'rodrigo arruda': 'rarruda@123',
-    'josé junior': 'jjunior@123',
-    'camila barbosa': 'cbarbosa@123',
-    'amanda santos': 'asantos@123',
-    'gislaine moreira': 'gmoreira@123',
-    'anderson oliveira': 'aoliveira@123'
-}
-
-APP = dash.Dash(__name__, external_stylesheets=["style.css", dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
+APP = dash.Dash(__name__, external_stylesheets=["style.css", dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True, url_base_pathname="/remessa/", server=app)
 server = APP.server
 
-# Adicione a autenticação ao seu aplicativo
-auth = dash_auth.BasicAuth(
-    APP,
-    VALID_USERNAME_PASSWORD_PAIRS
+# Layout da página principal
+main_layout = html.Div(
+    [
+        html.H1('Página de Cópias de Documentos', className='titulo-principal'),
+        # Aqui você pode adicionar o layout da sua página de cópias de documentos
+    ],
+    className='container-fluid imgbg',
 )
 
 APP.title = "Remessa de Documentos"
-
-# Função para limpar nomes de arquivos
-def clean_filename(name):
-    """Remove caracteres especiais do nome do arquivo."""
-    return re.sub(r'[^\w\s]', '_', name)
 
 # Função para limpar nomes de arquivos
 def clean_filename(name):
@@ -125,16 +109,20 @@ modal_download = dbc.Modal([
     dbc.ModalBody(html.P("O download da pasta foi iniciado!")),
 ], id="modal-download", is_open=False)
 
+# Define o layout inicial
+APP.layout = main_layout
+
 APP.layout = html.Div(
     [
         html.Meta(name='viewport', content='width=device-width, initial-scale=1.0'),
         html.Div(
             [
                 html.Img(
-                    src='assets/img/LOGO_paisagem.png',
+                    src=APP.get_asset_url('img/LOGO_paisagem.png'),
                     className='logo-img img-fluid'
                 ),
                 html.H1('Documentação mobilização RH e SST - UFV SABESP', className='titulo-principal'),
+                html.A(html.Button('Logout', id='btn-logout', className='botao-logout'), href='/login'),
                 html.Button('Atualizar Lista', id='btn-atualizar', className='botao-atualizar'),
                 dcc.Loading(
                     id="loading-1",
@@ -159,21 +147,21 @@ APP.layout = html.Div(
                 ], className='creditos-desenvolvedor'),
                 html.Div([
                     html.A(
-                        html.Img(src="/assets/img/pin.png"),
+                        html.Img(src=APP.get_asset_url("img/pin.png")),
                         href="https://maps.app.goo.gl/AETsHhsox8qcbbLk8", target="_blank", className='font-rodape'
                     ),
                     
                     html.A(
-                        html.Img(src="/assets/img/facebook.png"),
+                        html.Img(src=APP.get_asset_url("img/facebook.png")),
                         href="https://www.facebook.com/capuamarketing", target="_blank", className='font-rodape'
                     ),
                     
                     html.A(
-                        html.Img(src="/assets/img/linkedin.png"),
+                        html.Img(src=APP.get_asset_url("img/linkedin.png")),
                         href="https://br.linkedin.com/company/c-pua-projetos", target="_blank", className='font-rodape'
                     ),
                     html.A(
-                        html.Img(src="/assets/img/www.png"),
+                        html.Img(src=APP.get_asset_url("img/www.png")),
                         href="http://capua.com.br/", target="_blank", className='font-rodape'
                     ),
                 ], className='redes-sociais')
@@ -183,7 +171,6 @@ APP.layout = html.Div(
     ],
     className='container-fluid imgbg',
 )
-
 
 # Callback para abrir o modal de atualização
 @APP.callback(
@@ -249,4 +236,4 @@ def download_file(filename):
     return send_from_directory(NETWORK_DIRECTORY_PATH, filename, as_attachment=True)
 
 if __name__ == '__main__':
-    APP.run(debug=False) 
+    APP.run(debug=False)

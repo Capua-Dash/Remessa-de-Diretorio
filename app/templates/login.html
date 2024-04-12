@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .login-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-container h2 {
+            color: #333333;
+        }
+
+        .input-group-text {
+            background-color: transparent;
+            border: none;
+        }
+
+        .input-group-text i {
+            color: #6c757d;
+        }
+
+        .form-control {
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .font-rodape {
+            font-family: Arial, sans-serif;
+            margin-bottom: -0px;
+        }
+
+        .font-rodape-title {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: rgb(41, 169, 225);
+            margin-bottom: 0;
+        }
+
+        .rodape {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            padding: 10px;
+            background-color: #F0F8FF;
+            padding: 0px 10px 0px 10px;
+            height: 46px;
+        }
+
+        .info-contato {
+            float: left;
+            text-align: left;
+            width: 30%;
+            margin-top: 5px;
+        }
+
+        .creditos-desenvolvedor {
+            float: left;
+            text-align: center;
+            width: 40%;
+            margin-top: 12px;
+        }
+
+        .redes-sociais {
+            float: right;
+            text-align: right;
+            width: 30%;
+            margin-top: 8px;
+        }
+
+        .rodape:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .redes-sociais a {
+            font-size: 18px;
+            margin-left: 10px;
+            color: #0077b5;
+        }
+
+        .redes-sociais img {
+            width: 30px;
+            margin-left: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center vh-100">
+            <div class="col-md-6 col-lg-4">
+                <div class="login-container p-4">
+                    <h2 class="text-center mb-4">Login</h2>
+                    {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                    {% endif %}
+                    <form action="#" method="post">
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Username"
+                                required>
+                        </div>
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            </div>
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    </form>
+                    <hr>
+                    <p class="text-center">Não tem uma conta? Registre-se agora!</p>
+                    <button type="button" class="btn btn-secondary btn-block" data-toggle="modal"
+                        data-target="#registerModal">Registrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Registro -->
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">Registrar Cadastro</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/registrar" method="post">
+                        <div class="form-group">
+                            <label for="registerUsername">Username:</label>
+                            <input type="text" class="form-control" id="registerUsername" name="registerUsername"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerEmail">Email:</label>
+                            <input type="email" class="form-control" id="registerEmail" name="registerEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPassword">Password:</label>
+                            <input type="password" class="form-control" id="registerPassword" name="registerPassword"
+                                required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pop-up de sucesso -->
+    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Sucesso!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Registro bem-sucedido!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pop-up de erro -->
+    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Erro!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Entre em contato com o moderador!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery e Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Script personalizado -->
+    <script>
+        $(document).ready(function () {
+            $('#registerButton').click(function () {
+                var username = $('#registerUsername').val();
+                var email = $('#registerEmail').val();
+                var password = $('#registerPassword').val();
+                $.ajax({
+                    url: '/registrar',
+                    type: 'POST',
+                    data: {
+                        registerUsername: username,
+                        registerEmail: email,
+                        registerPassword: password
+                    },
+                    success: function(response) {
+                        // Se o registro for bem-sucedido, exiba o pop-up de sucesso
+                        $('#successModal').modal('show');
+                    },
+                    error: function(xhr, status, error) {
+                        // Se houver um erro no registro, exiba o pop-up de erro
+                        $('#errorModal').modal('show');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+<footer>
+    <div class="rodape">
+        <div class="info-contato">
+            <p class="font-rodape-title">CÁPUA ENGENHARIA</p>
+        </div>
+        <div class="creditos-desenvolvedor">
+            <p class="font-rodape">André Gondim © 2024</p>
+        </div>
+    </div>
+</footer>
+</html>
