@@ -9,7 +9,7 @@ from dash import html, Input, Output, dcc, dash
 import dash_auth
 
 # Constantes
-NETWORK_DIRECTORY_PATH = r'\\192.168.0.253\publico\Joseane (Arquivo Engenharia)\_Envio DOC. SST e RH\@DOC. SST e RH _ PADRAO'
+NETWORK_DIRECTORY_PATH = r'\\192.168.0.253\publico\Joseane (Arquivo Engenharia)\00 Envio DOC. SST e RH\00 DOC. SST e RH'
 
 # Defina suas credenciais de usuário
 VALID_USERNAME_PASSWORD_PAIRS = {
